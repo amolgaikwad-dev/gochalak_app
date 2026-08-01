@@ -22,6 +22,12 @@ class User(AbstractBaseUser, PermissionsMixin ):
     # Stores the user's full name.
     full_name = models.CharField(max_length=255)
 
+    email = models.EmailField(
+    unique=True,
+    null=True,
+    blank=True,
+    )  
+
     # Determines whether the user account is active.
     # Inactive users cannot authenticate.
     is_active = models.BooleanField(default=True)

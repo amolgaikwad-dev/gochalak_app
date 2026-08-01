@@ -15,7 +15,7 @@ from django.contrib.auth.base_user import BaseUserManager
 class UserManager(BaseUserManager):
 
     # Create and save a regular user.
-    def create_user(self, mobile, full_name, password=None):
+    def create_user(self, mobile, full_name, email, password=None):
 
         # Ensure that a mobile number is provided.
         # A user cannot be created without a unique
@@ -28,6 +28,8 @@ class UserManager(BaseUserManager):
         user = self.model(
             mobile=mobile,
             full_name=full_name,
+            email=email,
+
         )
 
         # Hash the plain text password before storing it
@@ -41,13 +43,14 @@ class UserManager(BaseUserManager):
 
 
     # Create and save a superuser (Administrator).
-    def create_superuser(self, mobile, full_name, password=None):
+    def create_superuser(self, mobile, full_name, email, password=None):
 
         # First, create a normal user using the
         # create_user() method to avoid code duplication.
         user = self.create_user(
             mobile=mobile,
             full_name=full_name,
+            email=email,
             password=password,
         )
 
